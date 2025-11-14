@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}{% endblock %} - The Feed</title>
+    <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>The Feed</h1>
+            <nav>
+                <a href="{{ path('feed') }}">Accueil</a>
+            </nav>
+        </div>
+    </header>
+
+    <div id="flashes-container">
+        {% for message in app.flashes('success') %}
+            <span class="flashes flashes-success">{{ message }}</span>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <span class="flashes flashes-error">{{ message }}</span>
+        {% endfor %}
+    </div>
+
+    {% block page_content %}{% endblock %}
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 The Feed - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    {% block javascripts %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    {% endblock %}
+</body>
+</html>

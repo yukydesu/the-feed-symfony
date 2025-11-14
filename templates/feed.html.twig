@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block page_title %}The Feed{% endblock %}
+
+{% block page_content %}
+<main>
+    <div id="feed" class="container">
+        <!-- Formulaire de création de publication -->
+        {{ form_start(formulairePublication, {'attr': {'id': 'feedy-new', 'novalidate': 'novalidate'}}) }}
+            <fieldset>
+                <legend>Nouveau feedy</legend>
+                <div>
+                    {{ form_widget(formulairePublication.message) }}
+                </div>
+                <div>
+                    {{ form_widget(formulairePublication.publier, {'id': 'feedy-new-submit', 'label': 'Feeder!'}) }}
+                </div>
+            </fieldset>
+            {{ form_rest(formulairePublication) }}
+        {{ form_end(formulairePublication) }}
+
+        <!-- Liste des publications -->
+        <div id="publications-list">
+            {% for publication in publications %}
+                <article class="publication">
+                    <div class="publication-date">
+                        {{ publication.datePublication|date('d/m/Y à H:i') }}
+                    </div>
+                    <div class="publication-message">
+                        {{ publication.message }}
+                    </div>
+                </article>
+            {% else %}
+                <p class="no-publications">Aucune publication pour le moment. Soyez le premier à poster !</p>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}

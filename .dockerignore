@@ -1,0 +1,11 @@
+# Exclure les fichiers inutiles du build
+.git/
+.gitignore
+var/cache/*
+var/log/*
+vendor/
+node_modules/
+.env.local
+.env.*.local
+*.md
+.DS_Store
