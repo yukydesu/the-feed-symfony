@@ -22,6 +22,11 @@ class FeedController extends AbstractController
         FlashMessageHelperInterface $flashMessageHelper
     ): Response
     {
+        // Sécurisation : seuls les utilisateurs connectés peuvent créer une publication
+        if ($request->isMethod('POST')) {
+            $this->denyAccessUnlessGranted('ROLE_USER');
+        }
+
         // Création du formulaire
         $publication = new Publication();
         $form = $this->createForm(PublicationType::class, $publication, [
@@ -32,20 +37,24 @@ class FeedController extends AbstractController
         // Traitement du formulaire
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // Affecter l'utilisateur connecté comme auteur
+            $utilisateur = $this->getUser();
+            $publication->setAuteur($utilisateur);
+
             $entityManager->persist($publication);
             $entityManager->flush();
 
             // Redirection pour éviter la resoumission
             return $this->redirectToRoute('feed');
         }
-        
+
         // Si le formulaire a été soumis mais n'est pas valide, on affiche les erreurs
         if ($form->isSubmitted() && !$form->isValid()) {
             $flashMessageHelper->addFormErrorsAsFlash($form);
         }
 
         // Récupération de toutes les publications
-        $publications = $publicationRepository->findAll();
+        $publications = $publicationRepository->findAllOrderedByDate();
 
         return $this->render('feed.html.twig', [
             'formulairePublication' => $form,

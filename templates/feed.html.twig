@@ -5,31 +5,26 @@
 {% block page_content %}
 <main>
     <div id="feed" class="container">
-        <!-- Formulaire de création de publication -->
-        {{ form_start(formulairePublication, {'attr': {'id': 'feedy-new', 'novalidate': 'novalidate'}}) }}
-            <fieldset>
-                <legend>Nouveau feedy</legend>
-                <div>
-                    {{ form_widget(formulairePublication.message) }}
-                </div>
-                <div>
-                    {{ form_widget(formulairePublication.publier, {'id': 'feedy-new-submit', 'label': 'Feeder!'}) }}
-                </div>
-            </fieldset>
-            {{ form_rest(formulairePublication) }}
-        {{ form_end(formulairePublication) }}
+        <!-- Formulaire de création de publication (uniquement pour utilisateurs connectés) -->
+        {% if is_granted('ROLE_USER') %}
+            {{ form_start(formulairePublication, {'attr': {'id': 'feedy-new', 'novalidate': 'novalidate'}}) }}
+                <fieldset>
+                    <legend>Nouveau feedy</legend>
+                    <div>
+                        {{ form_widget(formulairePublication.message) }}
+                    </div>
+                    <div>
+                        {{ form_widget(formulairePublication.publier, {'id': 'feedy-new-submit', 'label': 'Feeder!'}) }}
+                    </div>
+                </fieldset>
+                {{ form_rest(formulairePublication) }}
+            {{ form_end(formulairePublication) }}
+        {% endif %}
 
         <!-- Liste des publications -->
         <div id="publications-list">
             {% for publication in publications %}
-                <article class="publication">
-                    <div class="publication-date">
-                        {{ publication.datePublication|date('d/m/Y à H:i') }}
-                    </div>
-                    <div class="publication-message">
-                        {{ publication.message }}
-                    </div>
-                </article>
+                {{ include('publications/publication.html.twig', {'publication': publication}) }}
             {% else %}
                 <p class="no-publications">Aucune publication pour le moment. Soyez le premier à poster !</p>
             {% endfor %}

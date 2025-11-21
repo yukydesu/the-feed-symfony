@@ -29,6 +29,10 @@ class Publication
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $datePublication = null;
 
+    #[ORM\ManyToOne(fetch: 'EAGER', inversedBy: 'publications')]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    private ?Utilisateur $auteur = null;
+
     #[ORM\PrePersist]
     public function prePersistDatePublication(): void
     {
@@ -60,6 +64,18 @@ class Publication
     public function setDatePublication(\DateTimeInterface $datePublication): static
     {
         $this->datePublication = $datePublication;
+
+        return $this;
+    }
+
+    public function getAuteur(): ?Utilisateur
+    {
+        return $this->auteur;
+    }
+
+    public function setAuteur(?Utilisateur $auteur): static
+    {
+        $this->auteur = $auteur;
 
         return $this;
     }

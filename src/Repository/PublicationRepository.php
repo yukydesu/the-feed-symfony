@@ -16,6 +16,18 @@ class PublicationRepository extends ServiceEntityRepository
         parent::__construct($registry, Publication::class);
     }
 
+    /**
+     * @return Publication[] Returns an array of Publication objects ordered by date descending
+     */
+    public function findAllOrderedByDate(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.datePublication', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Publication[] Returns an array of Publication objects
 //     */

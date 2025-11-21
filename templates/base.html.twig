@@ -13,6 +13,15 @@
             <h1>The Feed</h1>
             <nav>
                 <a href="{{ path('feed') }}">Accueil</a>
+                {% if not is_granted('ROLE_USER') %}
+                    <a href="{{ path('inscription') }}">Inscription</a>
+                    <a href="{{ path('connexion') }}">Connexion</a>
+                {% else %}
+                    <a href="{{ path('pagePerso', {'login': app.user.login}) }}">Ma page</a>
+                    <form method="post" action="{{ path('_logout_main') }}">
+                        <button id="btn-deconnexion">Déconnexion</button>
+                    </form>
+                {% endif %}
             </nav>
         </div>
     </header>

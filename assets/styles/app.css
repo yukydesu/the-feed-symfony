@@ -46,6 +46,28 @@ header nav a:hover {
     background-color: rgba(255,255,255,0.2);
 }
 
+/* Bouton déconnexion dans le header */
+#btn-deconnexion {
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+}
+
+#btn-deconnexion:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: white;
+}
+
+header nav form {
+    display: inline;
+}
+
 /* Messages flash */
 #flashes-container {
     max-width: 800px;
@@ -135,6 +157,104 @@ fieldset button[type="submit"]:hover {
     background-color: #1a91da;
 }
 
+/* Formulaires d'accès (inscription, connexion) */
+.basic-form {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    padding: 2rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.basic-form.center {
+    display: block;
+}
+
+.basic-form fieldset {
+    background-color: white;
+    padding: 0;
+}
+
+.basic-form legend {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #14171a;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.access-container {
+    margin-bottom: 1.5rem;
+}
+
+.access-container label {
+    display: block;
+    font-weight: 600;
+    color: #14171a;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.access-container input[type="text"],
+.access-container input[type="password"],
+.access-container input[type="email"],
+.access-container input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.access-container input[type="text"]:focus,
+.access-container input[type="password"]:focus,
+.access-container input[type="email"]:focus,
+.access-container input[type="file"]:focus {
+    outline: none;
+    border-color: #1da1f2;
+}
+
+.help-input-form {
+    font-size: 0.85rem;
+    color: #657786;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.basic-form-submit {
+    width: 100%;
+    background-color: #1da1f2;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+}
+
+.basic-form-submit:hover {
+    background-color: #1a91da;
+}
+
+/* Page personnelle */
+#titre-page-perso {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #14171a;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
 /* Publications */
 #publications-list {
     margin-top: 2rem;
@@ -154,10 +274,45 @@ fieldset button[type="submit"]:hover {
     border-bottom: none;
 }
 
+
+/* Publications avec avatar */
+.publication-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.publication-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+    border: 2px solid #e1e8ed;
+}
+
+.publication-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.publication-author {
+    font-weight: 600;
+    color: #14171a;
+    font-size: 0.95rem;
+}
+
+.publication-author:hover {
+    text-decoration: underline;
+}
+
+.publication-header a {
+    text-decoration: none;
+}
+
 .publication-date {
     font-size: 0.85rem;
     color: #657786;
-    margin-bottom: 0.5rem;
 }
 
 .publication-message {
@@ -172,6 +327,67 @@ fieldset button[type="submit"]:hover {
     color: #657786;
     padding: 3rem 0;
     font-style: italic;
+}
+
+/* Erreurs de formulaire */
+.form-error {
+    color: #e0245e;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+ul.form-errors {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+}
+
+ul.form-errors li {
+    color: #e0245e;
+    font-size: 0.85rem;
+    background-color: #ffebee;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    border-left: 3px solid #e0245e;
+}
+
+/* Pages d'erreur personnalisées */
+.error-page {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.error-page h1 {
+    font-size: 4rem;
+    color: #1da1f2;
+    margin-bottom: 1rem;
+}
+
+.error-page h2 {
+    font-size: 1.5rem;
+    color: #14171a;
+    margin-bottom: 1rem;
+}
+
+.error-page p {
+    color: #657786;
+    margin-bottom: 2rem;
+}
+
+.error-page a {
+    display: inline-block;
+    background-color: #1da1f2;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.error-page a:hover {
+    background-color: #1a91da;
 }
 
 /* Footer */
@@ -190,12 +406,27 @@ footer {
     .container {
         padding: 0 15px;
     }
-    
+
     #feed {
         padding: 1rem;
     }
-    
+
     fieldset {
         padding: 1rem;
+    }
+
+    .basic-form {
+        padding: 1.5rem;
+    }
+
+    header nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .publication-avatar {
+        width: 40px;
+        height: 40px;
     }
 }

@@ -1,0 +1,16 @@
+<article class="publication">
+    <div class="publication-header">
+        <a href="{{ path('pagePerso', {'login': publication.auteur.login}) }}">
+            <img src="{{ asset('img/utilisateurs/' ~ (publication.auteur.nomPhotoProfil ? 'uploads/' ~ publication.auteur.nomPhotoProfil : 'anonyme.jpg')) }}"
+                 alt="Photo de {{ publication.auteur.login }}"
+                 class="publication-avatar">
+        </a>
+        <div class="publication-info">
+            <span class="publication-author">{{ publication.auteur.login }}</span>
+            <span class="publication-date">{{ publication.datePublication|date('d/m/Y à H:i') }}</span>
+        </div>
+    </div>
+    <div class="publication-message">
+        {{ publication.message }}
+    </div>
+</article>

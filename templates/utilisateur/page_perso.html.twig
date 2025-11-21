@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}Page de {{ utilisateur.login }}{% endblock %}
+
+{% block page_content %}
+<main>
+    <div class="center">
+        <p id="titre-page-perso">Page de {{ utilisateur.login }}</p>
+    </div>
+    <div id="feed">
+        {% for publication in utilisateur.publications %}
+            {{ include('publications/publication.html.twig', {'publication': publication}) }}
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}
